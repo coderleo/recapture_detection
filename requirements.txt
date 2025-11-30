@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+Pillow
+pillow-heif
+# torch and torchvision are environment heavy; ensure they are installed in your venv
+# torch
+# torchvision

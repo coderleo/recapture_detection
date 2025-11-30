@@ -1,0 +1,18 @@
+[project]
+name = "recapture-detection"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.122.0",
+    "matplotlib>=3.10.7",
+    "multipart>=1.3.0",
+    "numpy>=2.3.5",
+    "opencv-python>=4.11.0.86",
+    "pillow>=12.0.0",
+    "python-multipart>=0.0.20",
+    "torch>=2.9.1",
+    "torchvision>=0.24.1",
+    "uvicorn>=0.38.0",
+]

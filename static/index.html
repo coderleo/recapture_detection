@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Recapture Detection</title>
+    <style>
+      body { font-family: Arial, Helvetica, sans-serif; max-width: 700px; margin: 40px auto; padding: 0 16px; }
+      .preview { max-width: 100%; height: auto; margin-top: 12px; }
+      .result { margin-top: 12px; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>屏幕翻拍检测</h1>
+    <p>选择一张图片并上传，模型会返回该图片是否为屏幕翻拍（Fake）。</p>
+
+    <input id="fileInput" type="file" accept="image/*" />
+    <button id="uploadBtn">上传并检测</button>
+
+    <div>
+      <img id="preview" class="preview" src="" alt="预览" style="display:none;" />
+    </div>
+
+    <div id="result" class="result"></div>
+
+    <script>
+      const input = document.getElementById('fileInput');
+      const btn = document.getElementById('uploadBtn');
+      const preview = document.getElementById('preview');
+      const resultDiv = document.getElementById('result');
+
+      input.addEventListener('change', (ev) => {
+        const f = ev.target.files && ev.target.files[0];
+        if (!f) return;
+        preview.src = URL.createObjectURL(f);
+        preview.style.display = 'block';
+        resultDiv.textContent = '';
+      });
+
+      btn.addEventListener('click', async () => {
+        const f = input.files && input.files[0];
+        if (!f) { alert('请先选择图片'); return; }
+
+        const fd = new FormData();
+        fd.append('file', f, f.name);
+
+        resultDiv.textContent = '正在检测...';
+
+        try {
+          const res = await fetch('/predict', { method: 'POST', body: fd });
+          if (!res.ok) {
+            const txt = await res.text();
+            resultDiv.textContent = '检测失败: ' + res.status + ' ' + txt;
+            return;
+          }
+          const j = await res.json();
+          resultDiv.textContent = `预测: ${j.pred_class}   置信度: ${(j.confidence*100).toFixed(2)}%`;
+        } catch (err) {
+          resultDiv.textContent = '上传或网络错误: ' + err;
+        }
+      });
+    </script>
+  </body>
+</html>
