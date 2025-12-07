@@ -25,9 +25,11 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def load_model(path: str = "recapture_detection_model.pth"):
     try:
-        model = models.resnet18(pretrained=False)
-        num_ftrs = model.fc.in_features
-        model.fc = nn.Linear(num_ftrs, 2)
+        # 必须与训练时的架构一致
+        model = models.efficientnet_b0(weights=None) # 推理时不需要下载预训练权重，因为会加载本地pth
+        num_ftrs = model.classifier[1].in_features
+        model.classifier[1] = nn.Linear(num_ftrs, 2)
+        
         model.load_state_dict(torch.load(path, map_location=DEVICE))
         model.to(DEVICE)
         model.eval()

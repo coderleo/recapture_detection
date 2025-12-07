@@ -1,0 +1,15 @@
+path,true,pred,confidence
+dataset/val/fake/IMG_9856.jpg,fake,real,0.9998127818107605
+dataset/val/fake/IMG_9857.jpg,fake,real,0.9986869692802429
+dataset/val/fake/IMG_9870.jpg,fake,real,0.9431080222129822
+dataset/val/fake/IMG_9871.jpg,fake,real,0.9975482821464539
+dataset/val/fake/IMG_9873.jpg,fake,real,0.9374998211860657
+dataset/val/real/IMG_8609.jpg,real,fake,0.6679424047470093
+dataset/val/real/IMG_8611.jpg,real,fake,0.7088620066642761
+dataset/val/real/IMG_8616.jpg,real,fake,0.5105794072151184
+dataset/val/real/IMG_8623.jpg,real,fake,0.9540532827377319
+dataset/val/real/IMG_8624.jpg,real,fake,0.9425415992736816
+dataset/val/real/IMG_9003.jpg,real,fake,0.8461138606071472
+dataset/val/real/IMG_9155.jpg,real,fake,0.9987626075744629
+dataset/val/real/IMG_9157.jpg,real,fake,0.9765333533287048
+dataset/val/real/IMG_9208.jpg,real,fake,0.9998267292976379
